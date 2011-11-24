@@ -27,7 +27,14 @@ describe Mailgun::Mail do
       @mailer.send_email('mysteryinc.mailgun.org', @params)
     end.should raise_error ArgumentError
   end
-  it "must have a 'subject' argument"
+
+  it "must have a 'subject' argument" do
+    @params.delete(:subject)
+    expect do
+      @mailer.send_email('mysteryinc.mailgun.org', @params)
+    end.should raise_error ArgumentError
+  end
+
   it "must have a 'text' or 'html' argument"
   it "can set a delayed delivery time"
   it "allows the client to set a test mode"

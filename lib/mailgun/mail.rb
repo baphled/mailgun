@@ -10,6 +10,7 @@ module Mailgun
       url = @mailgun.base_url + '/' + domain + '/messages'
       params.fetch(:to) { raise ArgumentError.new(":to is a required arguement to send an email") }
       params.fetch(:from) { raise ArgumentError.new(":from is a required arguement to send an email") }
+      params.fetch(:subject) { raise ArgumentError.new(":subject is a required arguement to send an email") }
       Mailgun.submit(:post, url, params)
     end
   end
