@@ -21,7 +21,12 @@ describe Mailgun::Mail do
     end.should raise_error ArgumentError
   end
 
-  it "must have a 'to' argument"
+  it "must have a 'to' argument" do
+    @params.delete(:to)
+    expect do
+      @mailer.send_email('mysteryinc.mailgun.org', @params)
+    end.should raise_error ArgumentError
+  end
   it "must have a 'subject' argument"
   it "must have a 'text' or 'html' argument"
   it "can set a delayed delivery time"
