@@ -3,6 +3,7 @@ require "json"
 
 require "mailgun/mailgun_error"
 require "mailgun/base"
+require "mailgun/mail"
 require "mailgun/route"
 require "mailgun/mailbox"
 
