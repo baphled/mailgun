@@ -2,19 +2,41 @@ $:.unshift File.expand_path("../lib", File.dirname(__FILE__))
 require 'mailgun'
 
 describe Mailgun::Mail do
-
-  context "sending a successful email" do
-    before(:each) do
+  before(:each) do
       @mailgun = Mailgun::Base.new(:api_key => "some-api-key")
       @mailer = Mailgun::Mail.new @mailgun
-      @email_stub = {message: "Queued. Thank you.", id: 'some-id'}
-      @mailer.stub(:send_email).and_return @email_stub
       @params = {
         :from => 'scooby@mystery.inc',
         :to => 'scrappy@mystery.inc',
         :subject => 'hey yo',
         :text => 'Some cool email'
       }
+      Mailgun.stub(:submit)
+  end
+
+  it "must have a from argument" do
+    @params.delete(:from)
+    expect do
+      @mailer.send_email('mysteryinc.mailgun.org', @params)
+    end.should raise_error ArgumentError
+  end
+
+  it "must have a 'to' argument"
+  it "must have a 'subject' argument"
+  it "must have a 'text' or 'html' argument"
+  it "can set a delayed delivery time"
+  it "allows the client to set a test mode"
+  it "is able to cc recipients"
+  it "is able to bcc recipients"
+  it "can take an attachment"
+  it "can take an attachments"
+  it "accepts tags to associate to the email"
+  it "can be tracked"
+
+  context "sending a successful email" do
+    before(:each) do
+      @email_stub = {message: "Queued. Thank you.", id: 'some-id'}
+      @mailer.stub(:send_email).and_return @email_stub
     end
 
     it "must have the necessary email data to send an email" do
