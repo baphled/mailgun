@@ -5,7 +5,13 @@ module Mailgun
       @mailgun = mailgun
     end
 
-    # send email
+    #
+    # Uses Mail#submit to make a request to Mailgun
+    #
+    # A direct mapping to Mailgun API
+    #
+    # @see http://documentation.mailgun.net/api-sending.html
+    #
     def send_email(domain, params = {})
       url = @mailgun.base_url + '/' + domain + '/messages'
       [:to, :from, :subject].each do |attr|
