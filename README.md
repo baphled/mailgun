@@ -38,6 +38,16 @@ We mimic the ActiveRecord-style interface.
     # "I'm sorry Bond, it seems your mailbox will be... destroyed!"
     @mailbox.mailboxes.destroy "bond@mi5.co.uk"
 
+    # Sending an email out to a user
+    params = {
+      :from => 'scooby@mystery.inc',
+      :to => 'scrappy@mystery.inc',
+      :subject => 'hey you',
+      :text => 'Some cool email',
+      :html => '<b>Some cool</b> email'
+    }
+    @mailgun.send_email('mailbox@your-domain.com', params)
+
 Making Your Changes
 ===================
 
