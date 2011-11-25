@@ -17,7 +17,7 @@ module Mailgun
       [:to, :from, :subject].each do |attr|
         params.fetch(attr) { raise ArgumentError.new("#{attr} is a required arguement to send an email") }
       end
-      raise ArgumentError.new(":text or :html is a required arguement to send an email") if params[:text].nil? or params[:html].nil?
+      raise ArgumentError.new(":text or :html is a required arguement to send an email") if params[:text].nil? and params[:html].nil?
       Mailgun.submit(:post, url, params)
     end
   end

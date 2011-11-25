@@ -45,16 +45,17 @@ describe Mailgun::Mail do
 
       it "must have a 'text' or 'html' argument" do
         @params.delete(:text)
+        @params.delete(:html)
         expect do
           @mailgun.send_email('mysteryinc.mailgun.org', @params)
         end.should raise_error ArgumentError
       end
 
-      it "must have a 'text' or 'html' argument" do
+      it "only needs html or text format" do
         @params.delete(:html)
         expect do
           @mailgun.send_email('mysteryinc.mailgun.org', @params)
-        end.should raise_error ArgumentError
+        end.should_not raise_error ArgumentError
       end
     end
 
