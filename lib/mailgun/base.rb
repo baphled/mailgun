@@ -27,6 +27,11 @@ module Mailgun
     def routes
       @routes ||= Mailgun::Route.new(self)
     end
+
+    def send_email(domain, params={})
+      @mailer ||= Mailgun::Mail.new(self)
+      @mailer.send_email(domain, params)
+    end
   end
 
 
